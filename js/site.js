@@ -66,9 +66,13 @@
   });
 
   document.querySelectorAll(".needs-validation").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       event.stopPropagation();
+      const banner = document.getElementById("brief-success");
+      const err = document.getElementById("brief-error");
+      if (banner) banner.classList.add("d-none");
+      if (err) err.classList.add("d-none");
       if (!form.checkValidity()) {
         form.classList.add("was-validated");
         const first = form.querySelector(":invalid");
@@ -76,13 +80,26 @@
         return;
       }
       const btn = form.querySelector('button[type="submit"]');
-      if (btn) { btn.disabled = true; btn.textContent = "Brief received"; }
-      const banner = document.getElementById("brief-success");
-      if (banner) banner.classList.remove("d-none");
-      form.reset();
-      form.classList.remove("was-validated");
-      form.querySelectorAll(".form-live").forEach((el) => el.classList.remove("is-ok"));
-      form.querySelectorAll(".field-ok").forEach((el) => el.classList.remove("field-ok"));
+      const endpoint = form.getAttribute("action");
+      if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+      try {
+        const body = new FormData(form);
+        const res = await fetch(endpoint, {
+          method: "POST",
+          body,
+          headers: { Accept: "application/json" }
+        });
+        if (!res.ok) throw new Error("formspree " + res.status);
+        if (btn) btn.textContent = "Brief received";
+        if (banner) banner.classList.remove("d-none");
+        form.reset();
+        form.classList.remove("was-validated");
+        form.querySelectorAll(".form-live").forEach((el) => el.classList.remove("is-ok"));
+        form.querySelectorAll(".field-ok").forEach((el) => el.classList.remove("field-ok"));
+      } catch (e) {
+        if (btn) { btn.disabled = false; btn.textContent = "Send the brief"; }
+        if (err) err.classList.remove("d-none");
+      }
     });
   });
 })();

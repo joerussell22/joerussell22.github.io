@@ -32,15 +32,31 @@
   <main class="py-5"><div class="container"><div class="row g-5">
     <div class="col-lg-5">
       <p>One call, a written scope, a fixed price.</p>
-      <p class="text-secondary mb-0">studio@dreamweave.example</p>
+      <p class="text-secondary mb-0">Replies go to the mailbox on the Formspree account.</p>
     </div>
     <div class="col-lg-7">
-      <div id="brief-success" class="alert alert-success d-none">Brief received. This demo does not send email.</div>
-      <form id="brief-form" class="needs-validation" novalidate>
+      <div id="brief-success" class="alert alert-success d-none">Brief received. Check the Formspree inbox.</div>
+      <div id="brief-error" class="alert alert-danger d-none">Could not send. Try again, or email from Formspree directly.</div>
+      <form id="brief-form" class="needs-validation" action="https://formspree.io/f/xnpqewqr" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Dreamweave brief">
         <div class="row g-3">
-          <div class="col-md-6 form-live"><label class="form-label" for="name">Name</label><input class="form-control" id="name" required><span class="tick" aria-hidden="true">✓</span></div>
-          <div class="col-md-6 form-live"><label class="form-label" for="email">Email</label><input class="form-control" id="email" type="email" required><span class="tick" aria-hidden="true">✓</span></div>
-          <div class="col-12"><label class="form-label" for="notes">Notes</label><textarea class="form-control" id="notes" rows="4" placeholder="Pages, deadline, references…"></textarea></div>
+          <div class="col-md-6 form-live">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-control" id="name" name="name" autocomplete="name" required>
+            <span class="tick" aria-hidden="true">✓</span>
+          </div>
+          <div class="col-md-6 form-live">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" id="email" name="email" type="email" autocomplete="email" required>
+            <span class="tick" aria-hidden="true">✓</span>
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="notes">Notes</label>
+            <textarea class="form-control" id="notes" name="notes" rows="4" placeholder="Pages, deadline, references…"></textarea>
+          </div>
+          <div class="col-12" style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
           <div class="col-12"><button class="btn btn-gold sans" type="submit">Send the brief</button></div>
         </div>
       </form>

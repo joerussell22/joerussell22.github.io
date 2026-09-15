@@ -31,11 +31,27 @@ body {
 .navbar-dream .nav-link.active { color: var(--dw-gold-soft) !important; }
 .hero, .page-hero {
   margin-top: -72px; color: var(--dw-cream);
-  background: linear-gradient(180deg, #0b1c2c 0%, #0e3a4a 100%);
+  background:
+    linear-gradient(180deg, rgba(11, 28, 44, 0.55) 0%, rgba(11, 28, 44, 0.82) 100%),
+    url("../img/hero.jpg") center / cover no-repeat;
 }
 .hero { min-height: 92vh; padding-top: 72px; }
 .page-hero { padding: 10rem 0 5rem; }
-.page-hero.folio { background: linear-gradient(165deg, #0b1c2c 0%, #2a2218 70%, #3a2a16 100%); }
+.page-hero.library {
+  background:
+    linear-gradient(180deg, rgba(11, 28, 44, 0.55) 0%, rgba(11, 28, 44, 0.82) 100%),
+    url("../img/library.jpg") center / cover no-repeat;
+}
+.page-hero.folio {
+  background:
+    linear-gradient(165deg, rgba(11, 28, 44, 0.5) 0%, rgba(42, 34, 24, 0.78) 100%),
+    url("../img/work-folio.jpg") center / cover no-repeat;
+}
+.page-hero.wire {
+  background:
+    linear-gradient(180deg, rgba(11, 28, 44, 0.55) 0%, rgba(11, 28, 44, 0.82) 100%),
+    url("../img/wireframes.jpg") center / cover no-repeat;
+}
 .section-label { color: var(--dw-gold); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem; font-weight: 600; }
 .btn-gold {
   background: var(--dw-gold); color: var(--dw-navy); border: none; font-weight: 600;
