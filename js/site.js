@@ -9,6 +9,19 @@
     document.body.prepend(bar);
   }
 
+  // Back to top
+  if (!document.querySelector(".to-top")) {
+    const btn = document.createElement("button");
+    btn.className = "to-top";
+    btn.setAttribute("aria-label", "Back to top");
+    btn.innerHTML = "↑";
+    document.body.appendChild(btn);
+    const onScrollTop = () => btn.classList.toggle("is-in", window.scrollY > 400);
+    onScrollTop();
+    window.addEventListener("scroll", onScrollTop, { passive: true });
+    btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }));
+  }
+
   const nav = document.querySelector(".navbar-dream");
   const onScroll = () => {
     if (nav) nav.classList.toggle("is-compact", window.scrollY > 24);
