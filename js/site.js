@@ -12,11 +12,19 @@
   // Back to top
   if (!document.querySelector(".to-top")) {
     const btn = document.createElement("button");
+    btn.type = "button";
     btn.className = "to-top";
     btn.setAttribute("aria-label", "Back to top");
+    btn.tabIndex = -1;
+    btn.setAttribute("aria-hidden", "true");
     btn.innerHTML = "↑";
     document.body.appendChild(btn);
-    const onScrollTop = () => btn.classList.toggle("is-in", window.scrollY > 400);
+    const onScrollTop = () => {
+      const shown = window.scrollY > 400;
+      btn.classList.toggle("is-in", shown);
+      btn.tabIndex = shown ? 0 : -1;
+      btn.setAttribute("aria-hidden", shown ? "false" : "true");
+    };
     onScrollTop();
     window.addEventListener("scroll", onScrollTop, { passive: true });
     btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }));
